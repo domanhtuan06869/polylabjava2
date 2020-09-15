@@ -9,7 +9,7 @@ package lab1;
  *
  * @author tuan.domanh
  */
-public class Product {
+public class Product implements DAO{
 
     private String name;
     private double price;
@@ -54,4 +54,28 @@ public class Product {
         this.tax = tax;
     }
 
+    public Product() {
+    }
+
+    
+    // ghi đè interface
+    @Override
+    public void insert() {
+        System.out.println("lab1.Product.insert()");
+    }
+
+    @Override
+    public void update() {
+        System.out.println("lab1.Product.update()");
+    }
+
+    @Override
+    public void delete() {
+        System.out.println("lab1.Product.delete()");
+    }
+
+    @Override
+    public void select() {
+        System.out.println("lab1.Product.select()");
+    }
 }

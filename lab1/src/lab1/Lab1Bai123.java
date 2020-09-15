@@ -30,7 +30,7 @@ public class Lab1Bai123 {
             System.out.println("Sản phẩm thứ " + (i+1));
             System.out.print("Tên sp:");
             String name = in.nextLine();
-            System.out.print("Sản phẩm chịu thuế (Y or N):");
+            System.out.print("Sản phẩm chịu thuế? (Y or N):");
             String confirmTax = in.nextLine();
             System.out.print("Giá sp:");
             double prince = in.nextDouble();
@@ -54,6 +54,13 @@ public class Lab1Bai123 {
             System.exit(0);
         }
         renderArray(listproduct);
+        if(n==3){
+            Product product = new Product();
+            product.insert();     
+            product.update();
+            product.delete();   
+            product.select();
+        }
     }
 
     //function Dùng để render ra data của list Product
