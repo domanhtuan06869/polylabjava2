@@ -44,8 +44,6 @@ public class Lab1Bai1234 {
             // nếu xác nhận Y thì sản phẩm sẽ chịu thuế
             if (confirmTax.equals("Y") || confirmTax.equals("y")) {
                 tax = true;
-            } else {
-                tax = false;
             }
 
             // khởi tạo Product mới
