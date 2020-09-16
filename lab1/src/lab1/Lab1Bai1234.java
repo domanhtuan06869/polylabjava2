@@ -12,14 +12,18 @@ import java.util.Scanner;
  *
  * @author tuan.domanh
  */
-public class Lab1Bai123 {
+public class Lab1Bai1234 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        //Khởi tạo mới 1 arraylist OOP
         ArrayList<Product> listproduct = new ArrayList<Product>();
         int n = 0;
+
+        //Khởi tạo nhập từ bàn phím
         Scanner sn = new Scanner(System.in);
         System.out.print("nhập số lượng sản phẩm:");
         n = sn.nextInt();
@@ -27,7 +31,7 @@ public class Lab1Bai123 {
         for (int i = 0; i < n; i++) {
             Scanner in = new Scanner(System.in);
             System.out.println("___________________________");
-            System.out.println("Sản phẩm thứ " + (i+1));
+            System.out.println("Sản phẩm thứ " + (i + 1));
             System.out.print("Tên sp:");
             String name = in.nextLine();
             System.out.print("Sản phẩm chịu thuế? (Y or N):");
@@ -40,6 +44,8 @@ public class Lab1Bai123 {
             // nếu xác nhận Y thì sản phẩm sẽ chịu thuế
             if (confirmTax.equals("Y") || confirmTax.equals("y")) {
                 tax = true;
+            } else {
+                tax = false;
             }
 
             // khởi tạo Product mới
@@ -54,11 +60,13 @@ public class Lab1Bai123 {
             System.exit(0);
         }
         renderArray(listproduct);
-        if(n==3){
+
+        ///số lượng = 3 sử dụng interface đc implement trong Product
+        if (n == 3) {
             Product product = new Product();
-            product.insert();     
+            product.insert();
             product.update();
-            product.delete();   
+            product.delete();
             product.select();
         }
     }
@@ -91,12 +99,12 @@ public class Lab1Bai123 {
 
         }
     }
-    
+
     // func để in kết quả.
     static void printResult(String name, double price, double tax) {
         System.out.println("Sản phẩm :" + name);
         System.out.println("Giá :" + price + "VNĐ");
-        System.out.println("Thuế :" + tax + "VNĐ");      
+        System.out.println("Thuế :" + tax + "VNĐ");
         System.out.println("__________________________________");
 
     }
