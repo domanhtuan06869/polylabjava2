@@ -21,6 +21,6 @@ public class NoTaxProduct extends Product {
     // thuế 0%
     @Override
     public double getImportTax() {
-        return this.getPrice();
+        return 0;
     }
 }
