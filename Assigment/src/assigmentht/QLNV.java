@@ -11,21 +11,21 @@ import java.io.Serializable;
  *
  * @author DELL
  */
-public class QLNV implements Serializable{
-    
-    private String Manv,hoten,email;
+public class QLNV implements Serializable {
+
+    private String Manv, hoten, email;
     private int tuoi;
     private double luong;
 
     public QLNV() {
-       this.Manv = "";
+        this.Manv = "";
         this.hoten = "";
         this.email = "";
         this.tuoi = 19;
         this.luong = 650000;
     }
 
-    public QLNV(String Manv, String hoten, String email, int tuoi, double luong) {
+    public QLNV(String Manv, String hoten, int tuoi, String email, double luong) {
         this.Manv = Manv;
         this.hoten = hoten;
         this.email = email;
@@ -75,8 +75,7 @@ public class QLNV implements Serializable{
 
     @Override
     public String toString() {
-       return this.Manv + "\t" + this.hoten + "\t" + this.tuoi + "\t" + this.email + "\t" + this.luong;
+        return this.Manv + "\t" + this.hoten + "\t" + this.tuoi + "\t" + this.email + "\t" + this.luong;
     }
-    
 
 }

@@ -19,23 +19,24 @@ import jdk.nashorn.internal.runtime.regexp.joni.exception.JOniException;
  * @author DELL
  */
 public class GiaodienQL extends javax.swing.JFrame {
-    ArrayList<QLNV> lisNV=new ArrayList<>();
-    int vitri;
-    DefaultTableModel model=new DefaultTableModel();
+    
+    ArrayList<QLNV> listNv = new ArrayList<>();
+    ActionManager actionManager=new ActionManager();
+    int position;
+    DefaultTableModel model = new DefaultTableModel();
 
     /**
      * Creates new form GiaodienQL
      */
     public GiaodienQL() {
         initComponents();
-        model=(DefaultTableModel) jTable1.getModel();
-        lisNV.add(new QLNV("Ph05730", "Nguyễn Văn Lộc", "loc@gmail.com", 19, 500000));
-        lisNV.add(new QLNV("Ph05960", "Trần Hoàng Nam", "Nam@gmail.com", 19, 9500000));
-        lisNV.add(new QLNV("Ph05760", "Nguyễn Thị Nhung", "nhung@gmail.com", 19, 750000));
-        lisNV.add(new QLNV("Ph01230", "Phạm Văn Hoàng", "Hoàng@gmail.com", 19, 450000));
+        model = (DefaultTableModel) jTable1.getModel();
+//        listNv.add(new QLNV("Ph05730", "Nguyễn Văn Lộc", 19, "loc@gmail.com", 500000));
+//        listNv.add(new QLNV("Ph05730", "Nguyễn Văn Lộc", 19, "loc@gmail.com", 500000));
+    
         addTable();
-        int vitri=0;
-        display(vitri);
+//        int position = 0;
+//        display(position);
     }
 
     /**
@@ -330,52 +331,53 @@ public class GiaodienQL extends javax.swing.JFrame {
 
     private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
         try {
-            vitri=0;
-            display(vitri);
+            position = 0;
+            display(position);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
+            JOptionPane.showMessageDialog(null, "gặp lỗi" + e);
         }
     }//GEN-LAST:event_btndauActionPerformed
 
     private void btncuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuoiActionPerformed
-         try {
-            vitri=lisNV.size()-1;
-            display(vitri);
+        try {
+            position = listNv.size() - 1;
+            display(position);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
+            JOptionPane.showMessageDialog(null, "gặp lỗi" + e);
         }
     }//GEN-LAST:event_btncuoiActionPerformed
 
     private void btnluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnluiActionPerformed
         try {
-            if(vitri>0){
-            vitri--;
-            display(vitri);}
+            if (position > 0) {
+                position--;
+                display(position);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
+            JOptionPane.showMessageDialog(null, "gặp lỗi" + e);
         }
     }//GEN-LAST:event_btnluiActionPerformed
 
     private void btntienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntienActionPerformed
-         try {
-            if(vitri<lisNV.size()-1){
-            vitri++;
-            display(vitri);}
+        try {
+            if (position < listNv.size() - 1) {
+                position++;
+                display(position);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
         }
     }//GEN-LAST:event_btntienActionPerformed
 
     private void btnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnewActionPerformed
-       xoatrang();
+        clear();
     }//GEN-LAST:event_btnnewActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
-            int row=jTable1.getSelectedRow();
-            if(row>=0){
-                vitri=row;
-                display(vitri);
+            int row = jTable1.getSelectedRow();
+            if (row >= 0) {
+                position = row;
+                display(position);
             }
             
         } catch (Exception e) {
@@ -384,91 +386,86 @@ public class GiaodienQL extends javax.swing.JFrame {
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
         try {
-           
-            String ma=tfmanv.getText();
-            String hoten=tfhoten.getText();
-            String email=tfemail.getText();
-            int tuoi=Integer.parseInt(tftuoi.getText());
-            double luong=Double.parseDouble(tfluong.getText());
             
-            lisNV.add(new QLNV(ma, hoten, email, tuoi, luong));
+            String ma = tfmanv.getText();
+            String hoten = tfhoten.getText();
+            String email = tfemail.getText();
+            int tuoi = Integer.parseInt(tftuoi.getText());
+            double luong = Double.parseDouble(tfluong.getText());
+            actionManager.setListNv(ma, hoten, tuoi, email, luong);
             
-      
-            model.addRow(new Object[] {ma,hoten,email,tuoi,luong});
-            vitri=lisNV.size()-1;
-            display(vitri);
-        } 
-        catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
+            model.addRow(new Object[]{ma, hoten, tuoi, email, luong});
+            position = actionManager.getListNv().size() - 1;
+            System.out.println(position);
+            display(position);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "gặp lỗi" + e);
         }
     }//GEN-LAST:event_btnsaveActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
-       
-        try{
-            if(lisNV.isEmpty()){
-            JOptionPane.showMessageDialog(null, "không có gì để xóa");
-            return;
-        }
         
-        int n=JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không");
-        if(n==0){
-            lisNV.remove(vitri);
-            addTable();
-             JOptionPane.showMessageDialog(null, "xóa thành công");
-        }
-        if(lisNV.isEmpty()){
-            xoatrang();
-        }else{
-            vitri=0;
-            display(vitri);
-        }
-        }
-        catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "gặp lỗi"+e);
+        try {
+            if (listNv.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "không có gì để xóa");
+                return;
+            }
+            
+            int n = JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không");
+            if (n == 0) {
+                listNv.remove(position);
+                addTable();
+                JOptionPane.showMessageDialog(null, "xóa thành công");
+            }
+            if (listNv.isEmpty()) {
+                clear();
+            } else {
+                position = 0;
+                display(position);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "gặp lỗi" + e);
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnfindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfindActionPerformed
-       String ma=JOptionPane.showInputDialog("mời bạn nhập mã");
+        String ma = JOptionPane.showInputDialog("mời bạn nhập mã");
         try {
-
-            boolean kq=false;
-            for(QLNV x:lisNV){
-                if(x.getManv().equalsIgnoreCase(ma)){
-                    vitri=lisNV.indexOf(x);
-                    display(vitri);
-                    kq=true;
+            
+            boolean kq = false;
+            for (QLNV x : listNv) {
+                if (x.getManv().equalsIgnoreCase(ma)) {
+                    position = listNv.indexOf(x);
+                    display(position);
+                    kq = true;
                     
-                    break;   
+                    break;
                 }
             }
-            if(!kq){
-                JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã "+ma);
+            if (!kq) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã " + ma);
+            } else {
+                JOptionPane.showMessageDialog(null, "Có nhân viên  " + ma);
             }
-            else{
-                 JOptionPane.showMessageDialog(null, "Có nhân viên  "+ma);
-            }
-           
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "gặp loi"+e);
+            JOptionPane.showMessageDialog(null, "gặp loi" + e);
         }
     }//GEN-LAST:event_btnfindActionPerformed
 
     private void btnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnopenActionPerformed
         
-       try {
-
+        try {
             FileInputStream fis = new FileInputStream("a.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-       
-            lisNV = (ArrayList<QLNV>) ois.readObject(); 
-            if (lisNV.size() > 0) {
+            
+            listNv = (ArrayList<QLNV>) ois.readObject();
+            if (listNv.size() > 0) {
                 addTable();
-                vitri = 0;
-                display(vitri); 
+                position = 0;
+                display(position);
             } else {
-                xoatrang();
+                clear();
             }
             
             ois.close();
@@ -480,21 +477,19 @@ public class GiaodienQL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnopenActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
-       try {
-          int hoi=JOptionPane.showConfirmDialog(null, "bạn có thoát không");
-          if(hoi==0){
-            FileOutputStream fos = new FileOutputStream("a.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-            
-            oos.writeObject(lisNV);
-            
-            oos.flush();
-            fos.flush();
-            oos.close();
-            fos.close();
-            JOptionPane.showMessageDialog(null, "Ghi thanh cong");
-          }
+        try {
+            int hoi = JOptionPane.showConfirmDialog(null, "bạn có thoát không");
+            if (hoi == 0) {
+                FileOutputStream fos = new FileOutputStream("a.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                
+                oos.writeObject(listNv);
+                oos.flush();
+                fos.flush();
+                oos.close();
+                fos.close();
+                JOptionPane.showMessageDialog(null, "Ghi thanh cong");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gap loi: " + e);
         }
@@ -565,31 +560,31 @@ public class GiaodienQL extends javax.swing.JFrame {
     private javax.swing.JTextField tftuoi;
     // End of variables declaration//GEN-END:variables
 
-    private void display(int vitri) {
-       tfmanv.setText(lisNV.get(vitri).getManv());
-       tfhoten.setText(lisNV.get(vitri).getHoten());
-       tfemail.setText(lisNV.get(vitri).getEmail());
-       tftuoi.setText(lisNV.get(vitri).getTuoi()+"");
-       tfluong.setText(lisNV.get(vitri).getLuong()+"");
-       
-       jbhientai.setText("Record "+(vitri+1)+" of "+ lisNV.size());
-       jTable1.setRowSelectionInterval(vitri, vitri);
+    private void display(int position) {
+        tfmanv.setText(listNv.get(position).getManv());
+        tfhoten.setText(listNv.get(position).getHoten());
+        tfemail.setText(listNv.get(position).getEmail());
+        tftuoi.setText(listNv.get(position).getTuoi() + "");
+        tfluong.setText(listNv.get(position).getLuong() + "");
+        
+        jbhientai.setText("Record " + (position + 1) + " of " + listNv.size());
+        jTable1.setRowSelectionInterval(position, position);
     }
-
+    
     private void addTable() {
         model.setRowCount(0);
-        for(QLNV x:lisNV){
-            model.addRow(new Object[] {x.getManv(),x.getHoten(),x.getTuoi(),x.getEmail(),x.getLuong()});
-        }
+        actionManager.getListNv().forEach((item) -> {
+            model.addRow(new Object[]{item.getManv(), item.getHoten(), item.getTuoi(), item.getEmail(), item.getLuong()});
+        });
     }
-
-    private void xoatrang() {
-         tfemail.setText("");
+    
+    private void clear() {
+        tfemail.setText("");
         tfhoten.setText("");
         tfluong.setText("");
         tfmanv.setText("");
         tftuoi.setText("");
         jbhientai.setText("...");
-        vitri=-1;
+        position = -1;
     }
 }
