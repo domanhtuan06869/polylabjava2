@@ -6,6 +6,7 @@
 package assigmentht;
 
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,14 +17,6 @@ public class QLNV implements Serializable {
     private String Manv, hoten, email;
     private int tuoi;
     private double luong;
-
-    public QLNV() {
-        this.Manv = "";
-        this.hoten = "";
-        this.email = "";
-        this.tuoi = 19;
-        this.luong = 650000;
-    }
 
     public QLNV(String Manv, String hoten, int tuoi, String email, double luong) {
         this.Manv = Manv;
@@ -71,6 +64,15 @@ public class QLNV implements Serializable {
 
     public void setLuong(double luong) {
         this.luong = luong;
+    }
+
+    public boolean checkValidate() {
+        if (this.Manv.isEmpty()) {
+             JOptionPane.showConfirmDialog(null, "k để trống");
+            return false;
+        }
+
+        return true;
     }
 
     @Override
