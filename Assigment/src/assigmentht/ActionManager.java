@@ -16,19 +16,19 @@ import javax.swing.JOptionPane;
  *
  * @author tuan.domanh
  */
-public class ActionManager {
+public class ActionManager implements SaffDAO{
 
-    public ArrayList<QLNV> list = new ArrayList<>();
+    public ArrayList<Saff> list = new ArrayList<>();
 
-    public ArrayList<QLNV> getListNv() {
+    public ArrayList<Saff> getListSaff() {
         return list;
     }
-
-    public void setListNv(String id, String name, int age, String email, double salary) {
-        list.add(new QLNV(id, name, age, email, salary));
+    @Override
+    public void setListSaff(Saff saff) {
+        list.add(saff);
     }
 
-    public void initData(QLNV qlnv) {
+    public void initData(Saff qlnv) {
 
         list.add(qlnv);
 
@@ -36,7 +36,7 @@ public class ActionManager {
 
     public int deleteSaff(int position) {
         try {
-            if (this.getListNv().isEmpty()) {
+            if (this.getListSaff().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "không có gì để xóa");
                 return 0;
             }
@@ -57,8 +57,8 @@ public class ActionManager {
         try {
 
             boolean kq = false;
-            for (QLNV nv : list) {
-                if (nv.getManv().equalsIgnoreCase(id)) {
+            for (Saff nv : list) {
+                if (nv.getId().equalsIgnoreCase(id)) {
                     position = list.indexOf(nv);
                     kq = true;
                     break;
@@ -80,7 +80,7 @@ public class ActionManager {
         try {
             FileInputStream fis = new FileInputStream("a.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (ArrayList<QLNV>) ois.readObject();
+            list = (ArrayList<Saff>) ois.readObject();
             ois.close();
             fis.close();
         } catch (Exception e) {
@@ -93,7 +93,7 @@ public class ActionManager {
             FileOutputStream fos = new FileOutputStream("a.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-            oos.writeObject(this.getListNv());
+            oos.writeObject(this.getListSaff());
             oos.flush();
             fos.flush();
             oos.close();
@@ -103,4 +103,23 @@ public class ActionManager {
             System.out.println("assigmentht.ActionManager.saveFile()");
         }
     }
+
+    public boolean checkValidate(String id, String name, String age, String email, String salary) {
+        if (id.isEmpty() || name.isEmpty() || age.isEmpty() || email.isEmpty() || salary.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không để trống trường");
+            return false;
+        }
+        if (!age.matches("-?\\d+") || !salary.matches("-?\\d+")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhâp lương hoặc tuổi là số");
+            return false;
+        }
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        if (!email.matches(regex)) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhâp đúng kiểu email");
+            return false;
+        }
+
+        return true;
+    }
+
 }

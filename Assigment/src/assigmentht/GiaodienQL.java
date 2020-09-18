@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GiaodienQL extends javax.swing.JFrame {
 
-    ArrayList<QLNV> listNv = new ArrayList<>();
+    ArrayList<Saff> listNv = new ArrayList<>();
     ActionManager actionManager = new ActionManager();
     int position;
     DefaultTableModel model = new DefaultTableModel();
@@ -26,11 +26,10 @@ public class GiaodienQL extends javax.swing.JFrame {
     public GiaodienQL() {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
-       // actionManager.initData();
-        addTable();
-        if (!actionManager.getListNv().isEmpty()) {
+        loadTable();
+        if (!actionManager.getListSaff().isEmpty()) {
             int position = 0;
-            display(position);
+            positionDisplay(position);
         }
     }
 
@@ -49,11 +48,11 @@ public class GiaodienQL extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfmanv = new javax.swing.JTextField();
-        tfhoten = new javax.swing.JTextField();
-        tftuoi = new javax.swing.JTextField();
+        tfId = new javax.swing.JTextField();
+        tfName = new javax.swing.JTextField();
+        tfAge = new javax.swing.JTextField();
         tfemail = new javax.swing.JTextField();
-        tfluong = new javax.swing.JTextField();
+        tfSalary = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btndau = new javax.swing.JButton();
         btnlui = new javax.swing.JButton();
@@ -261,15 +260,15 @@ public class GiaodienQL extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfluong, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfmanv, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tftuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(21, 21, 21)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,7 +280,7 @@ public class GiaodienQL extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -296,15 +295,15 @@ public class GiaodienQL extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfmanv, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tftuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,7 +311,7 @@ public class GiaodienQL extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfluong, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -327,7 +326,7 @@ public class GiaodienQL extends javax.swing.JFrame {
     private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
         try {
             position = 0;
-            display(position);
+            positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btndauActionPerformed()");
         }
@@ -335,8 +334,8 @@ public class GiaodienQL extends javax.swing.JFrame {
 
     private void btncuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuoiActionPerformed
         try {
-            position = actionManager.getListNv().size() - 1;
-            display(position);
+            position = actionManager.getListSaff().size() - 1;
+            positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btncuoiActionPerformed()");
         }
@@ -346,7 +345,7 @@ public class GiaodienQL extends javax.swing.JFrame {
         try {
             if (position > 0) {
                 position--;
-                display(position);
+                positionDisplay(position);
             }
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnluiActionPerformed()");
@@ -356,9 +355,9 @@ public class GiaodienQL extends javax.swing.JFrame {
     private void btntienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntienActionPerformed
         try {
 
-            if (position < actionManager.getListNv().size() - 1) {
+            if (position < actionManager.getListSaff().size() - 1) {
                 position++;
-                display(position);
+                positionDisplay(position);
             }
         } catch (Exception e) {
         }
@@ -373,7 +372,7 @@ public class GiaodienQL extends javax.swing.JFrame {
             int row = jTable1.getSelectedRow();
             if (row >= 0) {
                 position = row;
-                display(position);
+                positionDisplay(position);
             }
         } catch (Exception e) {
         }
@@ -381,20 +380,20 @@ public class GiaodienQL extends javax.swing.JFrame {
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
         try {
-            String ma = tfmanv.getText();
-            String hoten = tfhoten.getText();
+            String id = tfId.getText();
+            String name = tfName.getText();
             String email = tfemail.getText();
-            int tuoi = Integer.parseInt(tftuoi.getText());
-            double luong = Double.parseDouble(tfluong.getText());
-            QLNV qlnv =new QLNV(ma, hoten, tuoi, email, luong);
-            boolean isValidate = qlnv.checkValidate();
-            if(!isValidate) return;
-            actionManager.initData(qlnv);
-            addTable();
-      ///   actionManager.setListNv(ma, hoten, tuoi, email, luong);
-        //  model.addRow(new Object[]{ma, hoten, tuoi, email, luong});
-            position = actionManager.getListNv().size() - 1;
-            display(position);
+            String age = tfAge.getText();
+            String salary = tfSalary.getText();
+            boolean isValidate = actionManager.checkValidate(id, name, age, email, salary);
+            if (!isValidate) {
+                return;
+            };
+            Saff saff = new Saff(id, name, Integer.parseInt(age), email, Double.parseDouble(salary));
+            actionManager.setListSaff(saff);
+            loadTable();
+            position = actionManager.getListSaff().size() - 1;
+            positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnsaveActionPerformed()");
         }
@@ -402,11 +401,11 @@ public class GiaodienQL extends javax.swing.JFrame {
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         position = actionManager.deleteSaff(position);
-        addTable();
-        if (actionManager.getListNv().isEmpty()) {
+        loadTable();
+        if (actionManager.getListSaff().isEmpty()) {
             clear();
         } else {
-            display(position);
+            positionDisplay(position);
             JOptionPane.showMessageDialog(null, "xóa thành công");
         }
     }//GEN-LAST:event_btndeleteActionPerformed
@@ -414,15 +413,15 @@ public class GiaodienQL extends javax.swing.JFrame {
     private void btnfindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfindActionPerformed
         String id = JOptionPane.showInputDialog("mời bạn nhập mã");
         int index = actionManager.findSaff(id);
-        display(index);
+        positionDisplay(index);
     }//GEN-LAST:event_btnfindActionPerformed
 
     private void btnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnopenActionPerformed
         actionManager.openFile();
-        addTable();
-        if (!actionManager.getListNv().isEmpty()) {
+        loadTable();
+        if (!actionManager.getListSaff().isEmpty()) {
             int index = 0;
-            display(index);
+            positionDisplay(index);
         } else {
             clear();
         }
@@ -433,11 +432,11 @@ public class GiaodienQL extends javax.swing.JFrame {
             int confrim = JOptionPane.showConfirmDialog(null, "bạn có thoát không");
             if (confrim == 0) {
                 actionManager.saveFile();
+                System.exit(0);
             }
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnexitActionPerformed()");
         }
-        System.exit(0);
     }//GEN-LAST:event_btnexitActionPerformed
 
     /**
@@ -467,7 +466,7 @@ public class GiaodienQL extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and positionDisplay the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GiaodienQL().setVisible(true);
@@ -498,36 +497,36 @@ public class GiaodienQL extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jbhientai;
     private javax.swing.JTextField tfemail;
-    private javax.swing.JTextField tfhoten;
-    private javax.swing.JTextField tfluong;
-    private javax.swing.JTextField tfmanv;
-    private javax.swing.JTextField tftuoi;
+    private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfSalary;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfAge;
     // End of variables declaration//GEN-END:variables
 
-    private void display(int position) {
-        tfmanv.setText(actionManager.getListNv().get(position).getManv());
-        tfhoten.setText(actionManager.getListNv().get(position).getHoten());
-        tfemail.setText(actionManager.getListNv().get(position).getEmail());
-        tftuoi.setText(actionManager.getListNv().get(position).getTuoi() + "");
-        tfluong.setText(actionManager.getListNv().get(position).getLuong() + "");
+    private void positionDisplay(int position) {
+        tfId.setText(actionManager.getListSaff().get(position).getId());
+        tfName.setText(actionManager.getListSaff().get(position).getName());
+        tfemail.setText(actionManager.getListSaff().get(position).getEmail());
+        tfAge.setText(actionManager.getListSaff().get(position).getAge() + "");
+        tfSalary.setText((int) actionManager.getListSaff().get(position).getSalary() + "");
 
-        jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListNv().size());
+        jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListSaff().size());
         jTable1.setRowSelectionInterval(position, position);
     }
 
-    private void addTable() {
+    private void loadTable() {
         model.setRowCount(0);
-        actionManager.getListNv().forEach((item) -> {
-            model.addRow(new Object[]{item.getManv(), item.getHoten(), item.getTuoi(), item.getEmail(), item.getLuong()});
+        actionManager.getListSaff().forEach((item) -> {
+            model.addRow(new Object[]{item.getId(), item.getName(), item.getAge(), item.getEmail(), item.getSalary()});
         });
     }
 
     private void clear() {
         tfemail.setText("");
-        tfhoten.setText("");
-        tfluong.setText("");
-        tfmanv.setText("");
-        tftuoi.setText("");
+        tfName.setText("");
+        tfSalary.setText("");
+        tfId.setText("");
+        tfAge.setText("");
         jbhientai.setText("...");
         position = -1;
     }
