@@ -13,19 +13,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author DELL
  */
-public class GiaodienQL extends javax.swing.JFrame {
+public class UISaffManager extends javax.swing.JFrame {
 
     ArrayList<Saff> listNv = new ArrayList<>();
     ActionManager actionManager = new ActionManager();
     int position;
-    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel tableModel = new DefaultTableModel();
 
     /**
      * Creates new form GiaodienQL
      */
-    public GiaodienQL() {
+    public UISaffManager() {
         initComponents();
-        model = (DefaultTableModel) jTable1.getModel();
+        setLocationRelativeTo(null);
+        tableModel = (DefaultTableModel) tbSafft.getModel();
         loadTable();
         if (!actionManager.getListSaff().isEmpty()) {
             int position = 0;
@@ -51,23 +52,23 @@ public class GiaodienQL extends javax.swing.JFrame {
         tfId = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
         tfAge = new javax.swing.JTextField();
-        tfemail = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         tfSalary = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        btndau = new javax.swing.JButton();
-        btnlui = new javax.swing.JButton();
-        btntien = new javax.swing.JButton();
-        btncuoi = new javax.swing.JButton();
+        btnTop = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnBottom = new javax.swing.JButton();
         jbhientai = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnnew = new javax.swing.JButton();
-        btnsave = new javax.swing.JButton();
-        btndelete = new javax.swing.JButton();
-        btnfind = new javax.swing.JButton();
-        btnopen = new javax.swing.JButton();
-        btnexit = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnFind = new javax.swing.JButton();
+        btnOpen = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbSafft = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,31 +85,31 @@ public class GiaodienQL extends javax.swing.JFrame {
 
         jLabel6.setText("Lương");
 
-        btndau.setText("|<");
-        btndau.addActionListener(new java.awt.event.ActionListener() {
+        btnTop.setText("|<");
+        btnTop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndauActionPerformed(evt);
+                btnTopActionPerformed(evt);
             }
         });
 
-        btnlui.setText("<<");
-        btnlui.addActionListener(new java.awt.event.ActionListener() {
+        btnPrev.setText("<<");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnluiActionPerformed(evt);
+                btnPrevActionPerformed(evt);
             }
         });
 
-        btntien.setText(">>");
-        btntien.addActionListener(new java.awt.event.ActionListener() {
+        btnNext.setText(">>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntienActionPerformed(evt);
+                btnNextActionPerformed(evt);
             }
         });
 
-        btncuoi.setText(">|");
-        btncuoi.addActionListener(new java.awt.event.ActionListener() {
+        btnBottom.setText(">|");
+        btnBottom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncuoiActionPerformed(evt);
+                btnBottomActionPerformed(evt);
             }
         });
 
@@ -118,13 +119,13 @@ public class GiaodienQL extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btndau)
+                .addComponent(btnTop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnlui)
+                .addComponent(btnPrev)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btntien)
+                .addComponent(btnNext)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btncuoi)
+                .addComponent(btnBottom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbhientai, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -134,55 +135,55 @@ public class GiaodienQL extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btndau)
-                    .addComponent(btnlui)
-                    .addComponent(btntien)
-                    .addComponent(btncuoi)
+                    .addComponent(btnTop)
+                    .addComponent(btnPrev)
+                    .addComponent(btnNext)
+                    .addComponent(btnBottom)
                     .addComponent(jbhientai, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnnew.setText("New");
-        btnnew.addActionListener(new java.awt.event.ActionListener() {
+        btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnewActionPerformed(evt);
+                btnNewActionPerformed(evt);
             }
         });
 
-        btnsave.setText("Save");
-        btnsave.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsaveActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        btndelete.setText("Delete");
-        btndelete.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndeleteActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnfind.setText("Find");
-        btnfind.addActionListener(new java.awt.event.ActionListener() {
+        btnFind.setText("Find");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnfindActionPerformed(evt);
+                btnFindActionPerformed(evt);
             }
         });
 
-        btnopen.setText("Open");
-        btnopen.addActionListener(new java.awt.event.ActionListener() {
+        btnOpen.setText("Open");
+        btnOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnopenActionPerformed(evt);
+                btnOpenActionPerformed(evt);
             }
         });
 
-        btnexit.setText("Exit");
-        btnexit.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnexitActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -193,33 +194,33 @@ public class GiaodienQL extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnnew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btndelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnfind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnopen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnexit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnnew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnopen, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnexit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbSafft.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -235,12 +236,12 @@ public class GiaodienQL extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbSafft.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tbSafftMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbSafft);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,7 +277,7 @@ public class GiaodienQL extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(tfemail))
+                                            .addComponent(tfEmail))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -307,7 +308,7 @@ public class GiaodienQL extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfemail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,25 +324,25 @@ public class GiaodienQL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
+    private void btnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopActionPerformed
         try {
             position = 0;
             positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btndauActionPerformed()");
         }
-    }//GEN-LAST:event_btndauActionPerformed
+    }//GEN-LAST:event_btnTopActionPerformed
 
-    private void btncuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuoiActionPerformed
+    private void btnBottomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBottomActionPerformed
         try {
             position = actionManager.getListSaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btncuoiActionPerformed()");
         }
-    }//GEN-LAST:event_btncuoiActionPerformed
+    }//GEN-LAST:event_btnBottomActionPerformed
 
-    private void btnluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnluiActionPerformed
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         try {
             if (position > 0) {
                 position--;
@@ -350,9 +351,9 @@ public class GiaodienQL extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnluiActionPerformed()");
         }
-    }//GEN-LAST:event_btnluiActionPerformed
+    }//GEN-LAST:event_btnPrevActionPerformed
 
-    private void btntienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntienActionPerformed
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         try {
 
             if (position < actionManager.getListSaff().size() - 1) {
@@ -361,45 +362,56 @@ public class GiaodienQL extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_btntienActionPerformed
+    }//GEN-LAST:event_btnNextActionPerformed
 
-    private void btnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnewActionPerformed
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         clear();
-    }//GEN-LAST:event_btnnewActionPerformed
+        actionManager.setCheckNewSaff(true);
+    }//GEN-LAST:event_btnNewActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tbSafftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSafftMouseClicked
         try {
-            int row = jTable1.getSelectedRow();
+            int row = tbSafft.getSelectedRow();
             if (row >= 0) {
                 position = row;
                 positionDisplay(position);
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tbSafftMouseClicked
 
-    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
             String id = tfId.getText();
             String name = tfName.getText();
-            String email = tfemail.getText();
+            String email = tfEmail.getText();
             String age = tfAge.getText();
             String salary = tfSalary.getText();
+
             boolean isValidate = actionManager.checkValidate(id, name, age, email, salary);
             if (!isValidate) {
                 return;
             };
             Saff saff = new Saff(id, name, Integer.parseInt(age), email, Double.parseDouble(salary));
-            actionManager.setListSaff(saff);
+
+            if (!actionManager.isCheckNewSaff()) {
+                actionManager.updateSaff(saff, actionManager.getListSaff().get(position).getId());
+            } else {
+                if (!actionManager.checkExits(id)) {
+                    actionManager.addSaff(saff);
+                    actionManager.setCheckNewSaff(false);
+                }
+            }
+
             loadTable();
             position = actionManager.getListSaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnsaveActionPerformed()");
         }
-    }//GEN-LAST:event_btnsaveActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         position = actionManager.deleteSaff(position);
         loadTable();
         if (actionManager.getListSaff().isEmpty()) {
@@ -408,26 +420,28 @@ public class GiaodienQL extends javax.swing.JFrame {
             positionDisplay(position);
             JOptionPane.showMessageDialog(null, "xóa thành công");
         }
-    }//GEN-LAST:event_btndeleteActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnfindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfindActionPerformed
-        String id = JOptionPane.showInputDialog("mời bạn nhập mã");
-        int index = actionManager.findSaff(id);
-        positionDisplay(index);
-    }//GEN-LAST:event_btnfindActionPerformed
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        int index = actionManager.findSaff();
+        if (!actionManager.getListSaff().isEmpty()) {
+            positionDisplay(index);
+        }
+    }//GEN-LAST:event_btnFindActionPerformed
 
-    private void btnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnopenActionPerformed
+    private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         actionManager.openFile();
         loadTable();
         if (!actionManager.getListSaff().isEmpty()) {
             int index = 0;
             positionDisplay(index);
+            actionManager.setCheckNewSaff(false);
         } else {
             clear();
         }
-    }//GEN-LAST:event_btnopenActionPerformed
+    }//GEN-LAST:event_btnOpenActionPerformed
 
-    private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         try {
             int confrim = JOptionPane.showConfirmDialog(null, "bạn có thoát không");
             if (confrim == 0) {
@@ -437,7 +451,7 @@ public class GiaodienQL extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnexitActionPerformed()");
         }
-    }//GEN-LAST:event_btnexitActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,35 +470,36 @@ public class GiaodienQL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GiaodienQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GiaodienQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GiaodienQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GiaodienQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and positionDisplay the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GiaodienQL().setVisible(true);
+                new UISaffManager().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncuoi;
-    private javax.swing.JButton btndau;
-    private javax.swing.JButton btndelete;
-    private javax.swing.JButton btnexit;
-    private javax.swing.JButton btnfind;
-    private javax.swing.JButton btnlui;
-    private javax.swing.JButton btnnew;
-    private javax.swing.JButton btnopen;
-    private javax.swing.JButton btnsave;
-    private javax.swing.JButton btntien;
+    private javax.swing.JButton btnBottom;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnFind;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnOpen;
+    private javax.swing.JButton btnPrev;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnTop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -494,35 +509,35 @@ public class GiaodienQL extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jbhientai;
-    private javax.swing.JTextField tfemail;
+    private javax.swing.JTable tbSafft;
+    private javax.swing.JTextField tfAge;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfSalary;
-    private javax.swing.JTextField tfId;
-    private javax.swing.JTextField tfAge;
     // End of variables declaration//GEN-END:variables
 
     private void positionDisplay(int position) {
         tfId.setText(actionManager.getListSaff().get(position).getId());
         tfName.setText(actionManager.getListSaff().get(position).getName());
-        tfemail.setText(actionManager.getListSaff().get(position).getEmail());
+        tfEmail.setText(actionManager.getListSaff().get(position).getEmail());
         tfAge.setText(actionManager.getListSaff().get(position).getAge() + "");
         tfSalary.setText((int) actionManager.getListSaff().get(position).getSalary() + "");
 
         jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListSaff().size());
-        jTable1.setRowSelectionInterval(position, position);
+        tbSafft.setRowSelectionInterval(position, position);
     }
 
     private void loadTable() {
-        model.setRowCount(0);
+        tableModel.setRowCount(0);
         actionManager.getListSaff().forEach((item) -> {
-            model.addRow(new Object[]{item.getId(), item.getName(), item.getAge(), item.getEmail(), item.getSalary()});
+            tableModel.addRow(new Object[]{item.getId(), item.getName(), item.getAge(), item.getEmail(), item.getSalary()});
         });
     }
 
     private void clear() {
-        tfemail.setText("");
+        tfEmail.setText("");
         tfName.setText("");
         tfSalary.setText("");
         tfId.setText("");

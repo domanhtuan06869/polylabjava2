@@ -6,8 +6,6 @@
 package assigmentht;
 
 import java.io.Serializable;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author DELL

@@ -16,22 +16,43 @@ import javax.swing.JOptionPane;
  *
  * @author tuan.domanh
  */
-public class ActionManager implements SaffDAO{
+public class ActionManager implements SaffDAO {
 
-    public ArrayList<Saff> list = new ArrayList<>();
+    private ArrayList<Saff> listSaff = new ArrayList<>();
+    private boolean checkNewSaff = true;
 
     public ArrayList<Saff> getListSaff() {
-        return list;
+        return listSaff;
     }
+
+    public boolean isCheckNewSaff() {
+        return checkNewSaff;
+    }
+
+    public void setCheckNewSaff(boolean checkNewSaff) {
+        this.checkNewSaff = checkNewSaff;
+    }
+
     @Override
-    public void setListSaff(Saff saff) {
-        list.add(saff);
+    public void addSaff(Saff saff) {
+        listSaff.add(saff);
     }
 
-    public void initData(Saff qlnv) {
+    public void updateSaff(Saff paramSaff, String id) {
+        for (Saff saff : this.getListSaff()) {
+            if (saff.getId().equalsIgnoreCase(id)) {
+                saff.setId(paramSaff.getId());
+                saff.setName(paramSaff.getName());
+                saff.setAge(paramSaff.getAge());
+                saff.setEmail(paramSaff.getEmail());
+                saff.setSalary(paramSaff.getSalary());
+                break;
+            }
+        }
+    }
 
-        list.add(qlnv);
-
+    public void initData(Saff saff) {
+        listSaff.add(saff);
     }
 
     public int deleteSaff(int position) {
@@ -43,7 +64,7 @@ public class ActionManager implements SaffDAO{
 
             int confrim = JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không");
             if (confrim == 0) {
-                list.remove(position);
+                listSaff.remove(position);
                 position = position - 1;
             }
         } catch (Exception e) {
@@ -52,22 +73,22 @@ public class ActionManager implements SaffDAO{
         return position;
     }
 
-    public int findSaff(String id) {
+    public int findSaff() {
+        String inputId = JOptionPane.showInputDialog("mời bạn nhập mã");
         int position = 0;
         try {
-
-            boolean kq = false;
-            for (Saff nv : list) {
-                if (nv.getId().equalsIgnoreCase(id)) {
-                    position = list.indexOf(nv);
-                    kq = true;
+            boolean result = false;
+            for (Saff saff : listSaff) {
+                if (saff.getId().equalsIgnoreCase(inputId)) {
+                    position = listSaff.indexOf(saff);
+                    result = true;
                     break;
                 }
             }
-            if (!kq) {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã " + id);
+            if (!result) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy nhân viên có mã " + inputId);
             } else {
-                JOptionPane.showMessageDialog(null, "Có nhân viên  " + id);
+                JOptionPane.showMessageDialog(null, "Có nhân viên  " + inputId);
             }
 
         } catch (Exception e) {
@@ -76,11 +97,21 @@ public class ActionManager implements SaffDAO{
         return position;
     }
 
+    public boolean checkExits(String id) {
+        for (Saff saff : this.getListSaff()) {
+            if (saff.getId().equalsIgnoreCase(id)) {
+                JOptionPane.showMessageDialog(null, "Đã tồn tại nhân viên có mã:" + id);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void openFile() {
         try {
             FileInputStream fis = new FileInputStream("a.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (ArrayList<Saff>) ois.readObject();
+            listSaff = (ArrayList<Saff>) ois.readObject();
             ois.close();
             fis.close();
         } catch (Exception e) {
@@ -92,7 +123,6 @@ public class ActionManager implements SaffDAO{
         try {
             FileOutputStream fos = new FileOutputStream("a.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-
             oos.writeObject(this.getListSaff());
             oos.flush();
             fos.flush();
@@ -118,7 +148,15 @@ public class ActionManager implements SaffDAO{
             JOptionPane.showMessageDialog(null, "Vui lòng nhâp đúng kiểu email");
             return false;
         }
+        if (Integer.parseInt(age) < 16 || Integer.parseInt(age) > 55) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập tuổi từ 16 đến 55");
+            return false;
+        }
 
+        if (Integer.parseInt(salary) < 5000000) {
+            JOptionPane.showMessageDialog(null, "Vui lòng lương từ 5 triệu trở lên");
+            return false;
+        }
         return true;
     }
 

@@ -10,5 +10,5 @@ package assigmentht;
  * @author tuand
  */
 public interface SaffDAO {
-    void setListSaff(Saff saff);
+    void addSaff(Saff saff);
 }
