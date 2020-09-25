@@ -7,6 +7,9 @@ package lab3;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,12 +21,13 @@ public class bai123 extends javax.swing.JFrame {
     /**
      * Creates new form bai123
      */
-    ArrayList <Student> listStudent =new ArrayList<>();
-     DefaultTableModel tableModel = new DefaultTableModel();
+    ArrayList<Student> listStudent = new ArrayList<>();
+    DefaultTableModel tableModel = new DefaultTableModel();
+
     public bai123() {
         initComponents();
         setLocationRelativeTo(null);
-        tableModel= (DefaultTableModel) tbStudent.getModel();
+        tableModel = (DefaultTableModel) tbStudent.getModel();
         tableModel.setRowCount(0);
     }
 
@@ -52,6 +56,8 @@ public class bai123 extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
+        btnOderName = new javax.swing.JButton();
+        btnOderMarks = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +96,11 @@ public class bai123 extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tbStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbStudentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbStudent);
 
         cbxRewards.setText("Có thưởng ?");
@@ -107,10 +118,39 @@ public class bai123 extends javax.swing.JFrame {
         });
 
         btnDelete.setText("XÓA");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("CẬP NHẬP");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("NHẬP MỚI");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
+
+        btnOderName.setText("Xếp theo tên");
+        btnOderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOderNameActionPerformed(evt);
+            }
+        });
+
+        btnOderMarks.setText("Xếp theo điểm");
+        btnOderMarks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOderMarksActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,7 +187,12 @@ public class bai123 extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnOderName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(btnOderMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,8 +224,12 @@ public class bai123 extends javax.swing.JFrame {
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate)
                     .addComponent(btnNew))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOderName)
+                    .addComponent(btnOderMarks))
                 .addContainerGap())
         );
 
@@ -195,6 +244,36 @@ public class bai123 extends javax.swing.JFrame {
         // TODO add your handling code here:
         addStudent();;
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tbStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbStudentMouseClicked
+        // TODO add your handling code here:
+        this.showDetail();
+    }//GEN-LAST:event_tbStudentMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        removeStudent();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        this.updateStudent();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        this.clear();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnOderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOderNameActionPerformed
+        // TODO add your handling code here:
+        this.orderByName();
+    }//GEN-LAST:event_btnOderNameActionPerformed
+
+    private void btnOderMarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOderMarksActionPerformed
+        // TODO add your handling code here:
+        this.orderByMarks();
+    }//GEN-LAST:event_btnOderMarksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,21 +309,95 @@ public class bai123 extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void addStudent(){
+
+    public void addStudent() {
         String name = tfName.getText();
-        String marks  = tfMarks.getText();
+        String marks = tfMarks.getText();
         String major = cbMajor.getSelectedItem().toString();
-        Student student=new Student(name, Float.parseFloat(marks), major);
+        Student student = new Student(name, Float.parseFloat(marks), major);
         listStudent.add(student);
-        Object [] row = new Object[]{student.getName(),student.getMarks(),student.getMajor(),student.getGrade(),student.isBonus()};
+        cbxRewards.setSelected(student.isBonus());
+        tfAcademicPower.setText(student.getGrade());
+        Object[] row = new Object[]{student.getName(), student.getMarks(), student.getMajor(), student.getGrade(), student.isBonus()};
         tableModel.addRow(row);
     }
 
+    public void fillToTable() {
+        tableModel.setRowCount(0);
+        for (Student student : listStudent) {
+            Object[] row = new Object[]{student.getName(), student.getMarks(), student.getMajor(), student.getGrade(), student.isBonus()};
+            tableModel.addRow(row);
+        }
+    }
+
+    public void showDetail() {
+        int index = tbStudent.getSelectedRow();
+        Student student = listStudent.get(index);
+        tfName.setText(student.getName());
+        tfMarks.setText(String.valueOf(student.getMarks()));
+        cbMajor.setSelectedItem(student.getMajor());
+        cbxRewards.setSelected(student.isBonus());
+        tfAcademicPower.setText(student.getGrade());
+    }
+
+    public void removeStudent() {
+        int index = tbStudent.getSelectedRow();
+        listStudent.remove(index);
+        this.fillToTable();
+    }
+
+    public void updateStudent() {
+        int index = tbStudent.getSelectedRow();
+        Student student = listStudent.get(index);
+        String name = tfName.getText();
+        String marks = tfMarks.getText();
+        String major = cbMajor.getSelectedItem().toString();
+        student.setName(name);
+        student.setMarks(Float.parseFloat(marks));
+        student.setMajor(major);
+        cbxRewards.setSelected(student.isBonus());
+        tfAcademicPower.setText(student.getGrade());
+        this.fillToTable();
+    }
+
+    public void clear() {
+        tfName.setText("");
+        tfMarks.setText("");
+        cbxRewards.setSelected(false);
+        tfAcademicPower.setText("");
+    }
+
+    public void orderByName(){
+        Comparator <Student> comparator = new Comparator<Student>() {
+            @Override
+            public int compare(Student t, Student t1) {
+                String s1=t.getName();
+                String s2 =t1.getName();
+                return s1.compareTo(s2);
+            }
+        };
+        Collections.sort(listStudent, comparator);
+        this.fillToTable();
+    }
+    
+    public void orderByMarks(){
+         Comparator <Student> comparator = new Comparator<Student>() {
+            @Override
+            public int compare(Student t, Student t1) {
+                Float s1=t.getMarks();
+                Float s2 =t1.getMarks();
+                return s1.compareTo(s2);
+            }
+        };
+        Collections.sort(listStudent, comparator);
+        this.fillToTable();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnOderMarks;
+    private javax.swing.JButton btnOderName;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbMajor;
     private javax.swing.JCheckBox cbxRewards;
