@@ -5,7 +5,6 @@
  */
 package assigmentht;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,9 +12,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author DELL
  */
-public class UISaffManager extends javax.swing.JFrame {
+public class UIStaffManager extends javax.swing.JFrame {
 
-    ArrayList<Saff> listNv = new ArrayList<>();
     ActionManager actionManager = new ActionManager();
     int position;
     DefaultTableModel tableModel = new DefaultTableModel();
@@ -23,12 +21,12 @@ public class UISaffManager extends javax.swing.JFrame {
     /**
      * Creates new form GiaodienQL
      */
-    public UISaffManager() {
+    public UIStaffManager() {
         initComponents();
         setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tbSafft.getModel();
         loadTable();
-        if (!actionManager.getListSaff().isEmpty()) {
+        if (!actionManager.getListStaff().isEmpty()) {
             int position = 0;
             positionDisplay(position);
         }
@@ -335,7 +333,7 @@ public class UISaffManager extends javax.swing.JFrame {
 
     private void btnBottomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBottomActionPerformed
         try {
-            position = actionManager.getListSaff().size() - 1;
+            position = actionManager.getListStaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btncuoiActionPerformed()");
@@ -356,7 +354,7 @@ public class UISaffManager extends javax.swing.JFrame {
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         try {
 
-            if (position < actionManager.getListSaff().size() - 1) {
+            if (position < actionManager.getListStaff().size() - 1) {
                 position++;
                 positionDisplay(position);
             }
@@ -392,10 +390,10 @@ public class UISaffManager extends javax.swing.JFrame {
             if (!isValidate) {
                 return;
             };
-            Saff saff = new Saff(id, name, Integer.parseInt(age), email, Double.parseDouble(salary));
+            Staff saff = new Staff(id, name, Integer.parseInt(age), email, Double.parseDouble(salary));
 
             if (!actionManager.isCheckNewSaff()) {
-                actionManager.updateSaff(saff, actionManager.getListSaff().get(position).getId());
+                actionManager.updateSaff(saff, actionManager.getListStaff().get(position).getId());
             } else {
                 if (!actionManager.checkExits(id)) {
                     actionManager.addSaff(saff);
@@ -404,7 +402,7 @@ public class UISaffManager extends javax.swing.JFrame {
             }
 
             loadTable();
-            position = actionManager.getListSaff().size() - 1;
+            position = actionManager.getListStaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
             System.out.println("assigmentht.GiaodienQL.btnsaveActionPerformed()");
@@ -414,7 +412,7 @@ public class UISaffManager extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         position = actionManager.deleteSaff(position);
         loadTable();
-        if (actionManager.getListSaff().isEmpty()) {
+        if (actionManager.getListStaff().isEmpty()) {
             clear();
         } else {
             positionDisplay(position);
@@ -424,7 +422,7 @@ public class UISaffManager extends javax.swing.JFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         int index = actionManager.findSaff();
-        if (!actionManager.getListSaff().isEmpty()) {
+        if (!actionManager.getListStaff().isEmpty()) {
             positionDisplay(index);
         }
     }//GEN-LAST:event_btnFindActionPerformed
@@ -432,7 +430,7 @@ public class UISaffManager extends javax.swing.JFrame {
     private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         actionManager.openFile();
         loadTable();
-        if (!actionManager.getListSaff().isEmpty()) {
+        if (!actionManager.getListStaff().isEmpty()) {
             int index = 0;
             positionDisplay(index);
             actionManager.setCheckNewSaff(false);
@@ -470,21 +468,23 @@ public class UISaffManager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIStaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIStaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIStaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UISaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIStaffManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and positionDisplay the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UISaffManager().setVisible(true);
+                new UIStaffManager().setVisible(true);
             }
         });
     }
@@ -519,19 +519,19 @@ public class UISaffManager extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void positionDisplay(int position) {
-        tfId.setText(actionManager.getListSaff().get(position).getId());
-        tfName.setText(actionManager.getListSaff().get(position).getName());
-        tfEmail.setText(actionManager.getListSaff().get(position).getEmail());
-        tfAge.setText(actionManager.getListSaff().get(position).getAge() + "");
-        tfSalary.setText((int) actionManager.getListSaff().get(position).getSalary() + "");
+        tfId.setText(actionManager.getListStaff().get(position).getId());
+        tfName.setText(actionManager.getListStaff().get(position).getName());
+        tfEmail.setText(actionManager.getListStaff().get(position).getEmail());
+        tfAge.setText(actionManager.getListStaff().get(position).getAge() + "");
+        tfSalary.setText((int) actionManager.getListStaff().get(position).getSalary() + "");
 
-        jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListSaff().size());
+        jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListStaff().size());
         tbSafft.setRowSelectionInterval(position, position);
     }
 
     private void loadTable() {
         tableModel.setRowCount(0);
-        actionManager.getListSaff().forEach((item) -> {
+        actionManager.getListStaff().forEach((item) -> {
             tableModel.addRow(new Object[]{item.getId(), item.getName(), item.getAge(), item.getEmail(), item.getSalary()});
         });
     }

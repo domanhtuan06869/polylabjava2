@@ -9,6 +9,6 @@ package assigmentht;
  *
  * @author tuand
  */
-public interface SaffDAO {
-    void addSaff(Saff saff);
+public interface StaffDAO {
+    void addSaff(Staff saff);
 }

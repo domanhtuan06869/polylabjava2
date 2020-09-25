@@ -10,13 +10,13 @@ import java.io.Serializable;
  *
  * @author DELL
  */
-public class Saff implements Serializable {
+public class Staff implements Serializable {
 
     private String id, name, email;
     private int age;
     private double salary;
 
-    public Saff(String id, String name, int age, String email, double salary) {
+    public Staff(String id, String name, int age, String email, double salary) {
         this.id = id;
         this.name = name;
         this.email = email;

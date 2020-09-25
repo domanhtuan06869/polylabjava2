@@ -16,12 +16,13 @@ import javax.swing.JOptionPane;
  *
  * @author tuan.domanh
  */
-public class ActionManager implements SaffDAO {
 
-    private ArrayList<Saff> listSaff = new ArrayList<>();
+public class ActionManager implements StaffDAO {
+
+    private ArrayList<Staff> listSaff = new ArrayList<>();
     private boolean checkNewSaff = true;
 
-    public ArrayList<Saff> getListSaff() {
+    public ArrayList<Staff> getListStaff() {
         return listSaff;
     }
 
@@ -34,12 +35,12 @@ public class ActionManager implements SaffDAO {
     }
 
     @Override
-    public void addSaff(Saff saff) {
+    public void addSaff(Staff saff) {
         listSaff.add(saff);
     }
 
-    public void updateSaff(Saff paramSaff, String id) {
-        for (Saff saff : this.getListSaff()) {
+    public void updateSaff(Staff paramSaff, String id) {
+        for (Staff saff : this.getListStaff()) {
             if (saff.getId().equalsIgnoreCase(id)) {
                 saff.setId(paramSaff.getId());
                 saff.setName(paramSaff.getName());
@@ -51,13 +52,13 @@ public class ActionManager implements SaffDAO {
         }
     }
 
-    public void initData(Saff saff) {
+    public void initData(Staff saff) {
         listSaff.add(saff);
     }
 
     public int deleteSaff(int position) {
         try {
-            if (this.getListSaff().isEmpty()) {
+            if (this.getListStaff().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "không có gì để xóa");
                 return 0;
             }
@@ -78,7 +79,7 @@ public class ActionManager implements SaffDAO {
         int position = 0;
         try {
             boolean result = false;
-            for (Saff saff : listSaff) {
+            for (Staff saff : listSaff) {
                 if (saff.getId().equalsIgnoreCase(inputId)) {
                     position = listSaff.indexOf(saff);
                     result = true;
@@ -98,7 +99,7 @@ public class ActionManager implements SaffDAO {
     }
 
     public boolean checkExits(String id) {
-        for (Saff saff : this.getListSaff()) {
+        for (Staff saff : this.getListStaff()) {
             if (saff.getId().equalsIgnoreCase(id)) {
                 JOptionPane.showMessageDialog(null, "Đã tồn tại nhân viên có mã:" + id);
                 return true;
@@ -111,7 +112,7 @@ public class ActionManager implements SaffDAO {
         try {
             FileInputStream fis = new FileInputStream("a.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            listSaff = (ArrayList<Saff>) ois.readObject();
+            listSaff = (ArrayList<Staff>) ois.readObject();
             ois.close();
             fis.close();
         } catch (Exception e) {
@@ -123,7 +124,7 @@ public class ActionManager implements SaffDAO {
         try {
             FileOutputStream fos = new FileOutputStream("a.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.getListSaff());
+            oos.writeObject(this.getListStaff());
             oos.flush();
             fos.flush();
             oos.close();
