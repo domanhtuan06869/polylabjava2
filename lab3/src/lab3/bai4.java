@@ -18,7 +18,6 @@ public class bai4 {
         HashMap<String, Student> has = new HashMap< String, Student>();
         Student student = new Student("Tuấn", 7, "Toán");
         has.put(student.getName(), student);
-
         Set<String> keys = has.keySet();
         for (String name : keys) {
             Student student1 = has.get(name);
