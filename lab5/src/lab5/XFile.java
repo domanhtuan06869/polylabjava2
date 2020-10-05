@@ -57,12 +57,12 @@ public class XFile {
             objectInputStream.close();
             fileInputStream.close();
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btnopenActionPerformed()" + e);
+            System.out.println(e);
         }
         return object;
     }
 
-    public void wirteObjects(String path,Object object) throws FileNotFoundException, IOException{
+    public void wirteObjects(String path, Object object) throws FileNotFoundException, IOException{
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
             oos.writeObject(object);
             oos.flush();
