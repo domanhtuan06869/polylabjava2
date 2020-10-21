@@ -10,5 +10,18 @@ package assigmentht;
  * @author tuand
  */
 public interface StaffDAO {
+
     void addSaff(Staff saff);
+
+    void updateSaff(Staff paramStaff, String id);
+
+    int deleteSaff(int position);
+
+    int findSaff();
+
+    boolean checkExits(String id);
+
+    void openFile();
+
+    void saveFile();
 }

@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  *
  * @author tuan.domanh
  */
-
 public class ActionManager implements StaffDAO {
 
     private ArrayList<Staff> listSaff = new ArrayList<>();
@@ -39,23 +38,21 @@ public class ActionManager implements StaffDAO {
         listSaff.add(saff);
     }
 
-    public void updateSaff(Staff paramSaff, String id) {
+    @Override
+    public void updateSaff(Staff paramStaff, String id) {
         for (Staff saff : this.getListStaff()) {
             if (saff.getId().equalsIgnoreCase(id)) {
-                saff.setId(paramSaff.getId());
-                saff.setName(paramSaff.getName());
-                saff.setAge(paramSaff.getAge());
-                saff.setEmail(paramSaff.getEmail());
-                saff.setSalary(paramSaff.getSalary());
+                saff.setId(paramStaff.getId());
+                saff.setName(paramStaff.getName());
+                saff.setAge(paramStaff.getAge());
+                saff.setEmail(paramStaff.getEmail());
+                saff.setSalary(paramStaff.getSalary());
                 break;
             }
         }
     }
 
-    public void initData(Staff saff) {
-        listSaff.add(saff);
-    }
-
+    @Override
     public int deleteSaff(int position) {
         try {
             if (this.getListStaff().isEmpty()) {
@@ -69,11 +66,12 @@ public class ActionManager implements StaffDAO {
                 position = position - 1;
             }
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btndeleteActionPerformed()");
+            System.out.println("assigmentht.ActionManager.deleteSaff()");
         }
         return position;
     }
 
+    @Override
     public int findSaff() {
         String inputId = JOptionPane.showInputDialog("mời bạn nhập mã");
         int position = 0;
@@ -93,11 +91,12 @@ public class ActionManager implements StaffDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("assigmentht.ActionManager.findSaff()" + e);
+            System.out.println("assigmentht.ActionManager.findSaff()");
         }
         return position;
     }
 
+    @Override
     public boolean checkExits(String id) {
         for (Staff saff : this.getListStaff()) {
             if (saff.getId().equalsIgnoreCase(id)) {
@@ -108,6 +107,7 @@ public class ActionManager implements StaffDAO {
         return false;
     }
 
+    @Override
     public void openFile() {
         try {
             FileInputStream fis = new FileInputStream("a.txt");
@@ -116,10 +116,11 @@ public class ActionManager implements StaffDAO {
             ois.close();
             fis.close();
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btnopenActionPerformed()" + e);
+            System.out.println("assigmentht.ActionManager.openFile()");
         }
     }
 
+    @Override
     public void saveFile() {
         try {
             FileOutputStream fos = new FileOutputStream("a.txt");

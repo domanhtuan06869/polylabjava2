@@ -5,6 +5,10 @@
  */
 package assigmentht;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,12 +28,29 @@ public class UIStaffManager extends javax.swing.JFrame {
     public UIStaffManager() {
         initComponents();
         setLocationRelativeTo(null);
-        tableModel = (DefaultTableModel) tbSafft.getModel();
+        tableModel = (DefaultTableModel) tbStaff.getModel();
         loadTable();
         if (!actionManager.getListStaff().isEmpty()) {
             int position = 0;
             positionDisplay(position);
         }
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Date now = new Date();
+                        SimpleDateFormat formater = new SimpleDateFormat();
+                        formater.applyPattern("hh:mm:ss aa");
+                        String time = formater.format(now);
+                        lbTime.setText(" " + time);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        System.out.println(".run()");
+                    }
+                }
+            }
+        }.start();
     }
 
     /**
@@ -41,6 +62,8 @@ public class UIStaffManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -57,7 +80,7 @@ public class UIStaffManager extends javax.swing.JFrame {
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnBottom = new javax.swing.JButton();
-        jbhientai = new javax.swing.JLabel();
+        jbPosition = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -65,8 +88,31 @@ public class UIStaffManager extends javax.swing.JFrame {
         btnFind = new javax.swing.JButton();
         btnOpen = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        lbTime = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbSafft = new javax.swing.JTable();
+        tbStaff = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 87, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +128,12 @@ public class UIStaffManager extends javax.swing.JFrame {
         jLabel5.setText("Email");
 
         jLabel6.setText("Lương");
+
+        tfSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSalaryActionPerformed(evt);
+            }
+        });
 
         btnTop.setText("|<");
         btnTop.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +177,7 @@ public class UIStaffManager extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBottom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbhientai, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,7 +189,7 @@ public class UIStaffManager extends javax.swing.JFrame {
                     .addComponent(btnPrev)
                     .addComponent(btnNext)
                     .addComponent(btnBottom)
-                    .addComponent(jbhientai, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -185,6 +237,11 @@ public class UIStaffManager extends javax.swing.JFrame {
             }
         });
 
+        lbTime.setForeground(new java.awt.Color(255, 51, 51));
+        lbTime.setText("hh:mm:ss aa");
+        lbTime.setMaximumSize(new java.awt.Dimension(63, 14));
+        lbTime.setMinimumSize(new java.awt.Dimension(63, 14));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -194,31 +251,34 @@ public class UIStaffManager extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                     .addComponent(btnFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        tbSafft.setModel(new javax.swing.table.DefaultTableModel(
+        tbStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -234,54 +294,52 @@ public class UIStaffManager extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbSafft.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbSafftMouseClicked(evt);
+                tbStaffMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbSafft);
+        jScrollPane1.setViewportView(tbStaff);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(44, 44, 44)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(tfEmail))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(21, 21, 21)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tfSalary))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tfAge))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tfId))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tfEmail))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -314,7 +372,7 @@ public class UIStaffManager extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -327,7 +385,7 @@ public class UIStaffManager extends javax.swing.JFrame {
             position = 0;
             positionDisplay(position);
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btndauActionPerformed()");
+            System.out.println("assigmentht.UIStaffManager.btnTopActionPerformed()");
         }
     }//GEN-LAST:event_btnTopActionPerformed
 
@@ -336,7 +394,7 @@ public class UIStaffManager extends javax.swing.JFrame {
             position = actionManager.getListStaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btncuoiActionPerformed()");
+            System.out.println("assigmentht.UIStaffManager.btnBottomActionPerformed()");
         }
     }//GEN-LAST:event_btnBottomActionPerformed
 
@@ -347,7 +405,7 @@ public class UIStaffManager extends javax.swing.JFrame {
                 positionDisplay(position);
             }
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btnluiActionPerformed()");
+            System.out.println("assigmentht.UIStaffManager.btnPrevActionPerformed()");
         }
     }//GEN-LAST:event_btnPrevActionPerformed
 
@@ -359,6 +417,7 @@ public class UIStaffManager extends javax.swing.JFrame {
                 positionDisplay(position);
             }
         } catch (Exception e) {
+            System.out.println("assigmentht.UIStaffManager.btnNextActionPerformed()");
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -367,14 +426,15 @@ public class UIStaffManager extends javax.swing.JFrame {
         actionManager.setCheckNewSaff(true);
     }//GEN-LAST:event_btnNewActionPerformed
 
-    private void tbSafftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSafftMouseClicked
+    private void tbStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSafftMouseClicked
         try {
-            int row = tbSafft.getSelectedRow();
+            int row = tbStaff.getSelectedRow();
             if (row >= 0) {
                 position = row;
                 positionDisplay(position);
             }
         } catch (Exception e) {
+            System.out.println("assigmentht.UIStaffManager.tbStaffMouseClicked()");
         }
     }//GEN-LAST:event_tbSafftMouseClicked
 
@@ -405,7 +465,7 @@ public class UIStaffManager extends javax.swing.JFrame {
             position = actionManager.getListStaff().size() - 1;
             positionDisplay(position);
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btnsaveActionPerformed()");
+            System.out.println("assigmentht.UIStaffManager.btnSaveActionPerformed()");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -447,9 +507,13 @@ public class UIStaffManager extends javax.swing.JFrame {
                 System.exit(0);
             }
         } catch (Exception e) {
-            System.out.println("assigmentht.GiaodienQL.btnexitActionPerformed()");
+            System.out.println("assigmentht.UIStaffManager.btnExitActionPerformed()");
         }
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void tfSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSalaryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -508,9 +572,12 @@ public class UIStaffManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jbhientai;
-    private javax.swing.JTable tbSafft;
+    private javax.swing.JLabel jbPosition;
+    private javax.swing.JLabel lbTime;
+    private javax.swing.JTable tbStaff;
     private javax.swing.JTextField tfAge;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfId;
@@ -522,11 +589,11 @@ public class UIStaffManager extends javax.swing.JFrame {
         tfId.setText(actionManager.getListStaff().get(position).getId());
         tfName.setText(actionManager.getListStaff().get(position).getName());
         tfEmail.setText(actionManager.getListStaff().get(position).getEmail());
-        tfAge.setText(actionManager.getListStaff().get(position).getAge() + "");
-        tfSalary.setText((int) actionManager.getListStaff().get(position).getSalary() + "");
+        tfAge.setText(String.valueOf(actionManager.getListStaff().get(position).getAge()));
+        tfSalary.setText(String.valueOf((int) actionManager.getListStaff().get(position).getSalary()));
 
-        jbhientai.setText("Record " + (position + 1) + " of " + actionManager.getListStaff().size());
-        tbSafft.setRowSelectionInterval(position, position);
+        jbPosition.setText("Record " + (position + 1) + " of " + actionManager.getListStaff().size());
+        tbStaff.setRowSelectionInterval(position, position);
     }
 
     private void loadTable() {
@@ -542,7 +609,7 @@ public class UIStaffManager extends javax.swing.JFrame {
         tfSalary.setText("");
         tfId.setText("");
         tfAge.setText("");
-        jbhientai.setText("...");
+        jbPosition.setText("...");
         position = -1;
     }
 }
