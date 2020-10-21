@@ -3,20 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab3;
+package test;
 
 import java.awt.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author tuan.domanh
  */
-public class bai123 extends javax.swing.JFrame {
+public class test1 extends javax.swing.JFrame {
 
     /**
      * Creates new form bai123
@@ -24,7 +29,7 @@ public class bai123 extends javax.swing.JFrame {
     ArrayList<Student> listStudent = new ArrayList<>();
     DefaultTableModel tableModel = new DefaultTableModel();
 
-    public bai123() {
+    public test1() {
         initComponents();
         setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tbStudent.getModel();
@@ -56,8 +61,8 @@ public class bai123 extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        btnOderName = new javax.swing.JButton();
-        btnOderMarks = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        Open = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,17 +143,17 @@ public class bai123 extends javax.swing.JFrame {
             }
         });
 
-        btnOderName.setText("Xếp theo tên");
-        btnOderName.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOderNameActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
-        btnOderMarks.setText("Xếp theo điểm");
-        btnOderMarks.addActionListener(new java.awt.event.ActionListener() {
+        Open.setText("Open");
+        Open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOderMarksActionPerformed(evt);
+                OpenActionPerformed(evt);
             }
         });
 
@@ -163,36 +168,35 @@ public class bai123 extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfAcademicPower, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxRewards)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAdd)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnDelete)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(btnUpdate)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnNew))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnOderName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(btnOderMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfAcademicPower, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbxRewards)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnAdd)
+                                            .addGap(27, 27, 27)
+                                            .addComponent(btnDelete)
+                                            .addGap(30, 30, 30)
+                                            .addComponent(btnUpdate)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(btnNew)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Open))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,13 +227,12 @@ public class bai123 extends javax.swing.JFrame {
                     .addComponent(btnAdd)
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate)
-                    .addComponent(btnNew))
+                    .addComponent(btnNew)
+                    .addComponent(Open))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOderName)
-                    .addComponent(btnOderMarks))
+                .addComponent(btnExit)
                 .addContainerGap())
         );
 
@@ -242,38 +245,111 @@ public class bai123 extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        addStudent();;
+        try {
+            String name = tfName.getText();
+            String marks = tfMarks.getText();
+            String major = cbMajor.getSelectedItem().toString();
+            if (name.isEmpty() || major.isEmpty() || marks.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Không để trống");
+                return;
+            }
+            Student student = new Student(name, Float.parseFloat(marks), major);
+            listStudent.add(student);
+            cbxRewards.setSelected(student.isBonus());
+            tfAcademicPower.setText(student.getGrade());
+            Object[] row = new Object[]{student.getName(), student.getMarks(), student.getMajor(), student.getGrade(), student.isBonus()};
+            tableModel.addRow(row);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Nhập điểm là số");
+
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void tbStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbStudentMouseClicked
         // TODO add your handling code here:
-        this.showDetail();
+        int index = tbStudent.getSelectedRow();
+        Student student = listStudent.get(index);
+        tfName.setText(student.getName());
+        tfMarks.setText(String.valueOf(student.getMarks()));
+        cbMajor.setSelectedItem(student.getMajor());
+        cbxRewards.setSelected(student.isBonus());
+        tfAcademicPower.setText(student.getGrade());
     }//GEN-LAST:event_tbStudentMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        removeStudent();
+        int index = tbStudent.getSelectedRow();
+        listStudent.remove(index);
+        this.fillToTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        this.updateStudent();
+        try {
+            int index = tbStudent.getSelectedRow();
+            Student student = listStudent.get(index);
+            String name = tfName.getText();
+            String marks = tfMarks.getText();
+            String major = cbMajor.getSelectedItem().toString();
+            if (name.isEmpty() || major.isEmpty() || marks.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Không để trống");
+                return;
+            }
+            student.setName(name);
+            student.setMarks(Float.parseFloat(marks));
+            student.setMajor(major);
+            cbxRewards.setSelected(student.isBonus());
+            tfAcademicPower.setText(student.getGrade());
+            this.fillToTable();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Nhập điểm là số");
+
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
-        this.clear();
+        tfName.setText("");
+        tfMarks.setText("");
+        cbxRewards.setSelected(false);
+        tfAcademicPower.setText("");
     }//GEN-LAST:event_btnNewActionPerformed
 
-    private void btnOderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOderNameActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        this.orderByName();
-    }//GEN-LAST:event_btnOderNameActionPerformed
+        try {
+            int confrim = JOptionPane.showConfirmDialog(null, "bạn có thoát không");
+            if (confrim == 0) {
+                FileOutputStream fos = new FileOutputStream("a.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(listStudent);
+                oos.flush();
+                fos.flush();
+                oos.close();
+                fos.close();
+                JOptionPane.showMessageDialog(null, "Đã lưu data");
+                System.exit(0);
+            }
 
-    private void btnOderMarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOderMarksActionPerformed
+        } catch (Exception e) {
+            System.out.println("assigmentht.ActionManager.saveFile()");
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         // TODO add your handling code here:
-        this.orderByMarks();
-    }//GEN-LAST:event_btnOderMarksActionPerformed
+        try {
+            FileInputStream fis = new FileInputStream("a.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            listStudent = (ArrayList<Student>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            System.out.println("test.test1.OpenActionPerformed()");
+        } finally {
+            fillToTable();
+        }
+    }//GEN-LAST:event_OpenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,13 +368,13 @@ public class bai123 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(bai123.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(bai123.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(bai123.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(bai123.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -308,21 +384,9 @@ public class bai123 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new bai123().setVisible(true);
+                new test1().setVisible(true);
             }
         });
-    }
-
-    public void addStudent() {
-        String name = tfName.getText();
-        String marks = tfMarks.getText();
-        String major = cbMajor.getSelectedItem().toString();
-        Student student = new Student(name, Float.parseFloat(marks), major);
-        listStudent.add(student);
-        cbxRewards.setSelected(student.isBonus());
-        tfAcademicPower.setText(student.getGrade());
-        Object[] row = new Object[]{student.getName(), student.getMarks(), student.getMajor(), student.getGrade(), student.isBonus()};
-        tableModel.addRow(row);
     }
 
     public void fillToTable() {
@@ -333,74 +397,12 @@ public class bai123 extends javax.swing.JFrame {
         }
     }
 
-    public void showDetail() {
-        int index = tbStudent.getSelectedRow();
-        Student student = listStudent.get(index);
-        tfName.setText(student.getName());
-        tfMarks.setText(String.valueOf(student.getMarks()));
-        cbMajor.setSelectedItem(student.getMajor());
-        cbxRewards.setSelected(student.isBonus());
-        tfAcademicPower.setText(student.getGrade());
-    }
-
-    public void removeStudent() {
-        int index = tbStudent.getSelectedRow();
-        listStudent.remove(index);
-        this.fillToTable();
-    }
-
-    public void updateStudent() {
-        int index = tbStudent.getSelectedRow();
-        Student student = listStudent.get(index);
-        String name = tfName.getText();
-        String marks = tfMarks.getText();
-        String major = cbMajor.getSelectedItem().toString();
-        student.setName(name);
-        student.setMarks(Float.parseFloat(marks));
-        student.setMajor(major);
-        cbxRewards.setSelected(student.isBonus());
-        tfAcademicPower.setText(student.getGrade());
-        this.fillToTable();
-    }
-
-    public void clear() {
-        tfName.setText("");
-        tfMarks.setText("");
-        cbxRewards.setSelected(false);
-        tfAcademicPower.setText("");
-    }
-
-    public void orderByName(){
-        Comparator <Student> comparator = new Comparator<Student>() {
-            @Override
-            public int compare(Student t, Student t1) {
-                String s1=t.getName();
-                String s2 =t1.getName();
-                return s1.compareTo(s2);
-            }
-        };
-        Collections.sort(listStudent, comparator);
-        this.fillToTable();
-    }
-    
-    public void orderByMarks(){
-         Comparator <Student> comparator = new Comparator<Student>() {
-            @Override
-            public int compare(Student t, Student t1) {
-                Float s1=t.getMarks();
-                Float s2 =t1.getMarks();
-                return s1.compareTo(s2);
-            }
-        };
-        Collections.sort(listStudent, comparator);
-        this.fillToTable();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Open;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnOderMarks;
-    private javax.swing.JButton btnOderName;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbMajor;
     private javax.swing.JCheckBox cbxRewards;
