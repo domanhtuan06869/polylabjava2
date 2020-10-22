@@ -60,10 +60,11 @@ public class ActionManager implements StaffDAO {
                 return 0;
             }
 
-            int confrim = JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không");
+            int confrim = JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không", "Alert", JOptionPane.YES_NO_OPTION);
             if (confrim == 0) {
                 listSaff.remove(position);
                 position = position - 1;
+                JOptionPane.showMessageDialog(null, "xóa thành công");
             }
         } catch (Exception e) {
             System.out.println("assigmentht.ActionManager.deleteSaff()");

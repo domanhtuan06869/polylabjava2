@@ -477,7 +477,6 @@ public class UIStaffManager extends javax.swing.JFrame {
             clear();
         } else {
             positionDisplay(position);
-            JOptionPane.showMessageDialog(null, "xóa thành công");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -502,7 +501,7 @@ public class UIStaffManager extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         try {
-            int confrim = JOptionPane.showConfirmDialog(null, "bạn có thoát không");
+            int confrim = JOptionPane.showConfirmDialog(null, "bạn có thoát không", "Alert", JOptionPane.YES_NO_OPTION);
             if (confrim == 0) {
                 actionManager.saveFile();
                 System.exit(0);
