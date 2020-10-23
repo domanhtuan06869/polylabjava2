@@ -288,7 +288,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnNew" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnSave" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnDelete" alignment="0" pref="76" max="32767" attributes="0"/>
+                      <Component id="btnDelete" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnFind" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnOpen" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnExit" alignment="0" max="32767" attributes="0"/>
