@@ -11,13 +11,13 @@ package assigmentht;
  */
 public interface StaffDAO {
 
-    void addSaff(Staff saff);
+    void addStaff(Staff saff);
 
-    void updateSaff(Staff paramStaff, String id);
+    void updateStaff(Staff paramStaff, String id);
 
-    int deleteSaff(int position);
+    int deleteStaff(int position);
 
-    int findSaff();
+    int findStaff();
 
     boolean checkExits(String id);
 

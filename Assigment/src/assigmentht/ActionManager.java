@@ -18,28 +18,28 @@ import javax.swing.JOptionPane;
  */
 public class ActionManager implements StaffDAO {
 
-    private ArrayList<Staff> listSaff = new ArrayList<>();
-    private boolean checkNewSaff = true;
+    private ArrayList<Staff> listStaff = new ArrayList<>();
+    private boolean checkNewStaff = true;
 
     public ArrayList<Staff> getListStaff() {
-        return listSaff;
+        return listStaff;
     }
 
-    public boolean isCheckNewSaff() {
-        return checkNewSaff;
+    public boolean isCheckNewStaff() {
+        return checkNewStaff;
     }
 
-    public void setCheckNewSaff(boolean checkNewSaff) {
-        this.checkNewSaff = checkNewSaff;
-    }
-
-    @Override
-    public void addSaff(Staff saff) {
-        listSaff.add(saff);
+    public void setCheckNewStaff(boolean checkNewSatff) {
+        this.checkNewStaff = checkNewStaff;
     }
 
     @Override
-    public void updateSaff(Staff paramStaff, String id) {
+    public void addStaff(Staff staff) {
+        listStaff.add(staff);
+    }
+
+    @Override
+    public void updateStaff(Staff paramStaff, String id) {
         for (Staff saff : this.getListStaff()) {
             if (saff.getId().equalsIgnoreCase(id)) {
                 saff.setId(paramStaff.getId());
@@ -53,7 +53,7 @@ public class ActionManager implements StaffDAO {
     }
 
     @Override
-    public int deleteSaff(int position) {
+    public int deleteStaff(int position) {
         try {
             if (this.getListStaff().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "không có gì để xóa");
@@ -62,7 +62,7 @@ public class ActionManager implements StaffDAO {
 
             int confrim = JOptionPane.showConfirmDialog(null, "bạn có muốn xóa không", "Alert", JOptionPane.YES_NO_OPTION);
             if (confrim == 0) {
-                listSaff.remove(position);
+                listStaff.remove(position);
                 position = position - 1;
                 JOptionPane.showMessageDialog(null, "xóa thành công");
             }
@@ -73,14 +73,14 @@ public class ActionManager implements StaffDAO {
     }
 
     @Override
-    public int findSaff() {
+    public int findStaff() {
         String inputId = JOptionPane.showInputDialog("mời bạn nhập mã");
         int position = 0;
         try {
             boolean result = false;
-            for (Staff saff : listSaff) {
-                if (saff.getId().equalsIgnoreCase(inputId)) {
-                    position = listSaff.indexOf(saff);
+            for (Staff satff : listStaff) {
+                if (satff.getId().equalsIgnoreCase(inputId)) {
+                    position = listStaff.indexOf(satff);
                     result = true;
                     break;
                 }
@@ -113,7 +113,7 @@ public class ActionManager implements StaffDAO {
         try {
             FileInputStream fis = new FileInputStream("a.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            listSaff = (ArrayList<Staff>) ois.readObject();
+            listStaff = (ArrayList<Staff>) ois.readObject();
             ois.close();
             fis.close();
         } catch (Exception e) {

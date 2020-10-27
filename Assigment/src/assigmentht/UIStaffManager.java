@@ -424,7 +424,7 @@ public class UIStaffManager extends javax.swing.JFrame {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         clear();
-        actionManager.setCheckNewSaff(true);
+        actionManager.setCheckNewStaff(true);
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void tbStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSafftMouseClicked
@@ -453,12 +453,12 @@ public class UIStaffManager extends javax.swing.JFrame {
             };
             Staff saff = new Staff(id, name, Integer.parseInt(age), email, Double.parseDouble(salary));
 
-            if (!actionManager.isCheckNewSaff()) {
-                actionManager.updateSaff(saff, actionManager.getListStaff().get(position).getId());
+            if (!actionManager.isCheckNewStaff()) {
+                actionManager.updateStaff(saff, actionManager.getListStaff().get(position).getId());
             } else {
                 if (!actionManager.checkExits(id)) {
-                    actionManager.addSaff(saff);
-                    actionManager.setCheckNewSaff(false);
+                    actionManager.addStaff(saff);
+                    actionManager.setCheckNewStaff(false);
                 }
             }
 
@@ -471,7 +471,7 @@ public class UIStaffManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        position = actionManager.deleteSaff(position);
+        position = actionManager.deleteStaff(position);
         loadTable();
         if (actionManager.getListStaff().isEmpty()) {
             clear();
@@ -481,7 +481,7 @@ public class UIStaffManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        int index = actionManager.findSaff();
+        int index = actionManager.findStaff();
         if (!actionManager.getListStaff().isEmpty()) {
             positionDisplay(index);
         }
@@ -493,7 +493,7 @@ public class UIStaffManager extends javax.swing.JFrame {
         if (!actionManager.getListStaff().isEmpty()) {
             int index = 0;
             positionDisplay(index);
-            actionManager.setCheckNewSaff(false);
+            actionManager.setCheckNewStaff(false);
         } else {
             clear();
         }
