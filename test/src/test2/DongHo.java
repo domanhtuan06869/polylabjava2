@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class DongHo implements  Serializable{
     String ten;
-    double gia;
+    double giafff;
     String hang;
 
     public DongHo(String ten, double gia, String hang) {
